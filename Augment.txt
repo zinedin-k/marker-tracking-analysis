@@ -1,0 +1,18 @@
+import Augmentor
+
+original_dataset_path = r"C:\Users\eminm\OneDrive\Desktop\Projects\Symbol Recognition\code\data\no_augmentation_datasets\test"
+
+output_path = r"C:\Users\eminm\OneDrive\Desktop\Projects\Symbol Recognition\code\data\augmentation_dataset\test"
+
+pipeline = Augmentor.Pipeline(original_dataset_path, output_directory=output_path)
+
+pipeline.rotate(probability=0.7, max_left_rotation=10, max_right_rotation=10)
+pipeline.zoom_random(probability=0.5, percentage_area=0.8)
+pipeline.flip_left_right(probability=0.5)
+pipeline.flip_top_bottom(probability=0.5)
+pipeline.random_distortion(probability=0.5, grid_width=2, grid_height=2, magnitude=2)
+pipeline.crop_random(probability=0.5, percentage_area=0.8)
+
+num_augmented_images = 1000
+
+pipeline.sample(num_augmented_images)
